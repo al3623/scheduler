@@ -102,10 +102,14 @@ static inline int dl_policy(int policy)
 {
 	return policy == SCHED_DEADLINE;
 }
+static inline int uncomfy_policy(int policy)
+{
+	return policy == SCHED_UNCOMFY;
+}
 static inline bool valid_policy(int policy)
 {
 	return idle_policy(policy) || fair_policy(policy) ||
-		rt_policy(policy) || dl_policy(policy);
+		rt_policy(policy) || dl_policy(policy) || uncomfy_policy(policy);
 }
 
 static inline int task_has_rt_policy(struct task_struct *p)
@@ -342,6 +346,11 @@ extern int sched_group_set_shares(struct task_group *tg, unsigned long shares);
 struct cfs_bandwidth { };
 
 #endif	/* CONFIG_CGROUP_SCHED */
+
+/* Uncomfy scheduler fields in a runqueue */
+struct uncomfy_rq {
+	
+};
 
 /* CFS-related fields in a runqueue */
 struct cfs_rq {
